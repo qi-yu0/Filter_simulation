@@ -14,8 +14,19 @@ class FilterSimulator:
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
-        self.t = np.linspace(0, 1, 1000, endpoint=False)
-        self.signal = np.sin(2 * np.pi * 5 * self.t)
+        self.file_path = 'C://Users//ThinkPad//Desktop//signal.wav'
+        fs, signal = wavfile.read(self.file_path)
+
+        
+
+        # 获取时间序列
+        duration = len(signal) / fs
+        self.t = np.linspace(0, duration, len(signal), endpoint=False)
+
+        # 获取信号序列
+        self.signal = signal
+        #self.t = np.linspace(0, 1, 1000, endpoint=False)
+        #self.signal = np.sin(2 * np.pi * 5 * self.t)
 
         self.fs = 1000.0
         self.low_cutoff = 20.0
